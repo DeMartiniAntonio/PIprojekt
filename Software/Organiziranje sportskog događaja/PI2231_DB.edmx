@@ -1,0 +1,1070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PI2231_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clanovi_tima">
+          <Key>
+            <PropertyRef Name="id_korisnik" />
+            <PropertyRef Name="id_tim" />
+          </Key>
+          <Property Name="id_korisnik" Type="int" Nullable="false" />
+          <Property Name="id_tim" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dogadaj">
+          <Key>
+            <PropertyRef Name="Id_dogadaj" />
+          </Key>
+          <Property Name="Id_dogadaj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="opis" Type="varchar" MaxLength="50" />
+          <Property Name="datum_izvodenja" Type="datetime" Nullable="false" />
+          <Property Name="lokacija" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rok_prijave" Type="datetime" Nullable="false" />
+          <Property Name="organizator" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grupa">
+          <Key>
+            <PropertyRef Name="id_grupa" />
+          </Key>
+          <Property Name="id_grupa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oznaka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="postignuti_golovi" Type="int" Nullable="false" />
+          <Property Name="primljeni_golovi" Type="int" Nullable="false" />
+          <Property Name="pobjede" Type="int" Nullable="false" />
+          <Property Name="porazi" Type="int" Nullable="false" />
+          <Property Name="remi" Type="int" Nullable="false" />
+          <Property Name="id_turnir" Type="int" Nullable="false" />
+          <Property Name="id_tim" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="korisnik">
+          <Key>
+            <PropertyRef Name="id_korisnik" />
+          </Key>
+          <Property Name="id_korisnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prezime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="korisnicko_ime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lozinka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kontakt_broj" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_uloga" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="moderator_dogadaja">
+          <Key>
+            <PropertyRef Name="id_moderator" />
+            <PropertyRef Name="id_dogadaj" />
+          </Key>
+          <Property Name="id_moderator" Type="int" Nullable="false" />
+          <Property Name="id_dogadaj" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="organizacija">
+          <Key>
+            <PropertyRef Name="id_organizacija" />
+          </Key>
+          <Property Name="id_organizacija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OIB" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kontakt_broj" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="korisnicko_ime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lozinka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="opis" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prijava_za_turnir">
+          <Key>
+            <PropertyRef Name="id_tim" />
+            <PropertyRef Name="id_turnir" />
+          </Key>
+          <Property Name="id_tim" Type="int" Nullable="false" />
+          <Property Name="id_turnir" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="raspored_utakmica">
+          <Key>
+            <PropertyRef Name="id_utakmica" />
+          </Key>
+          <Property Name="id_utakmica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tim_jedan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tim_dva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="broj_golova_prvog_tima" Type="int" Nullable="false" />
+          <Property Name="broj_golova_drugog_tima" Type="int" Nullable="false" />
+          <Property Name="id_turnir" Type="int" Nullable="false" />
+          <Property Name="faza" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="samostalna_prijava">
+          <Key>
+            <PropertyRef Name="int_korisnik" />
+            <PropertyRef Name="int_turnir" />
+          </Key>
+          <Property Name="int_korisnik" Type="int" Nullable="false" />
+          <Property Name="int_turnir" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id_sport" />
+          </Key>
+          <Property Name="id_sport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="min_clanova_tima" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statistika_igraca">
+          <Key>
+            <PropertyRef Name="statistika_igraca_id" />
+          </Key>
+          <Property Name="igrac_id" Type="int" Nullable="false" />
+          <Property Name="pogodak" Type="int" />
+          <Property Name="asistencija" Type="int" />
+          <Property Name="skok" Type="int" />
+          <Property Name="prekrsaj" Type="int" />
+          <Property Name="statistika_igraca_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statistika_igraca_turnir">
+          <Key>
+            <PropertyRef Name="id_statistika_igraca" />
+            <PropertyRef Name="id_turnir" />
+          </Key>
+          <Property Name="id_statistika_igraca" Type="int" Nullable="false" />
+          <Property Name="id_turnir" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status_dogadaja">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tim">
+          <Key>
+            <PropertyRef Name="id_tim" />
+          </Key>
+          <Property Name="id_tim" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pristupni_kod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="broj_clanova" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="turnir">
+          <Key>
+            <PropertyRef Name="id_turnir" />
+          </Key>
+          <Property Name="id_turnir" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kotizacija" Type="float" Nullable="false" />
+          <Property Name="max_clanova_tima" Type="int" Nullable="false" />
+          <Property Name="id_dogadaj" Type="int" Nullable="false" />
+          <Property Name="id_sport" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uloga_korisnika">
+          <Key>
+            <PropertyRef Name="id_uloga_korisnika" />
+          </Key>
+          <Property Name="id_uloga_korisnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="FK_clanovi_tima_korisnik">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="1" />
+          <End Role="clanovi_tima" Type="Self.clanovi_tima" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id_korisnik" />
+            </Principal>
+            <Dependent Role="clanovi_tima">
+              <PropertyRef Name="id_korisnik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clanovi_tima_tim">
+          <End Role="tim" Type="Self.tim" Multiplicity="1" />
+          <End Role="clanovi_tima" Type="Self.clanovi_tima" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim">
+              <PropertyRef Name="id_tim" />
+            </Principal>
+            <Dependent Role="clanovi_tima">
+              <PropertyRef Name="id_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dogadaj_organizacija">
+          <End Role="organizacija" Type="Self.organizacija" Multiplicity="1" />
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organizacija">
+              <PropertyRef Name="id_organizacija" />
+            </Principal>
+            <Dependent Role="dogadaj">
+              <PropertyRef Name="organizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dogadaj_status_dogadaja">
+          <End Role="status_dogadaja" Type="Self.status_dogadaja" Multiplicity="1" />
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_dogadaja">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="dogadaj">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupa_tim">
+          <End Role="tim" Type="Self.tim" Multiplicity="1" />
+          <End Role="grupa" Type="Self.grupa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim">
+              <PropertyRef Name="id_tim" />
+            </Principal>
+            <Dependent Role="grupa">
+              <PropertyRef Name="id_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupa_turnir">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="grupa" Type="Self.grupa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="grupa">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_uloga_korisnika">
+          <End Role="uloga_korisnika" Type="Self.uloga_korisnika" Multiplicity="1" />
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uloga_korisnika">
+              <PropertyRef Name="id_uloga_korisnika" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="id_uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_moderator_dogadaja_dogadaj">
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="1" />
+          <End Role="moderator_dogadaja" Type="Self.moderator_dogadaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dogadaj">
+              <PropertyRef Name="Id_dogadaj" />
+            </Principal>
+            <Dependent Role="moderator_dogadaja">
+              <PropertyRef Name="id_dogadaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_moderator_dogadaja_korisnik">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="1" />
+          <End Role="moderator_dogadaja" Type="Self.moderator_dogadaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id_korisnik" />
+            </Principal>
+            <Dependent Role="moderator_dogadaja">
+              <PropertyRef Name="id_moderator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prijava_za_turnir_tim">
+          <End Role="tim" Type="Self.tim" Multiplicity="1" />
+          <End Role="prijava_za_turnir" Type="Self.prijava_za_turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim">
+              <PropertyRef Name="id_tim" />
+            </Principal>
+            <Dependent Role="prijava_za_turnir">
+              <PropertyRef Name="id_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prijava_za_turnir_turnir">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="prijava_za_turnir" Type="Self.prijava_za_turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="prijava_za_turnir">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_raspored_utakmica_turnir2">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="raspored_utakmica" Type="Self.raspored_utakmica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="raspored_utakmica">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_samostalna_prijava_korisnik">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="1" />
+          <End Role="samostalna_prijava" Type="Self.samostalna_prijava" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id_korisnik" />
+            </Principal>
+            <Dependent Role="samostalna_prijava">
+              <PropertyRef Name="int_korisnik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_samostalna_prijava_turnir">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="samostalna_prijava" Type="Self.samostalna_prijava" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="samostalna_prijava">
+              <PropertyRef Name="int_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistika_igraca_korisnik">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="1" />
+          <End Role="statistika_igraca" Type="Self.statistika_igraca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id_korisnik" />
+            </Principal>
+            <Dependent Role="statistika_igraca">
+              <PropertyRef Name="igrac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistika_igraca_turnir_statistika_igraca1">
+          <End Role="statistika_igraca" Type="Self.statistika_igraca" Multiplicity="1" />
+          <End Role="statistika_igraca_turnir" Type="Self.statistika_igraca_turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statistika_igraca">
+              <PropertyRef Name="statistika_igraca_id" />
+            </Principal>
+            <Dependent Role="statistika_igraca_turnir">
+              <PropertyRef Name="id_statistika_igraca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistika_igraca_turnir_turnir1">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="statistika_igraca_turnir" Type="Self.statistika_igraca_turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="statistika_igraca_turnir">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_turnir_dogadaj">
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="1" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dogadaj">
+              <PropertyRef Name="Id_dogadaj" />
+            </Principal>
+            <Dependent Role="turnir">
+              <PropertyRef Name="id_dogadaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_turnir_sport">
+          <End Role="sport" Type="Self.sport" Multiplicity="1" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="turnir">
+              <PropertyRef Name="id_sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PI2231_DBModelStoreContainer">
+          <EntitySet Name="clanovi_tima" EntityType="Self.clanovi_tima" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dogadaj" EntityType="Self.dogadaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grupa" EntityType="Self.grupa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="korisnik" EntityType="Self.korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="moderator_dogadaja" EntityType="Self.moderator_dogadaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="organizacija" EntityType="Self.organizacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prijava_za_turnir" EntityType="Self.prijava_za_turnir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="raspored_utakmica" EntityType="Self.raspored_utakmica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="samostalna_prijava" EntityType="Self.samostalna_prijava" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sport" EntityType="Self.sport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statistika_igraca" EntityType="Self.statistika_igraca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statistika_igraca_turnir" EntityType="Self.statistika_igraca_turnir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status_dogadaja" EntityType="Self.status_dogadaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tim" EntityType="Self.tim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="turnir" EntityType="Self.turnir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uloga_korisnika" EntityType="Self.uloga_korisnika" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_clanovi_tima_korisnik" Association="Self.FK_clanovi_tima_korisnik">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="clanovi_tima" EntitySet="clanovi_tima" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clanovi_tima_tim" Association="Self.FK_clanovi_tima_tim">
+            <End Role="tim" EntitySet="tim" />
+            <End Role="clanovi_tima" EntitySet="clanovi_tima" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dogadaj_organizacija" Association="Self.FK_dogadaj_organizacija">
+            <End Role="organizacija" EntitySet="organizacija" />
+            <End Role="dogadaj" EntitySet="dogadaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dogadaj_status_dogadaja" Association="Self.FK_dogadaj_status_dogadaja">
+            <End Role="status_dogadaja" EntitySet="status_dogadaja" />
+            <End Role="dogadaj" EntitySet="dogadaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupa_tim" Association="Self.FK_grupa_tim">
+            <End Role="tim" EntitySet="tim" />
+            <End Role="grupa" EntitySet="grupa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupa_turnir" Association="Self.FK_grupa_turnir">
+            <End Role="turnir" EntitySet="turnir" />
+            <End Role="grupa" EntitySet="grupa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_uloga_korisnika" Association="Self.FK_korisnik_uloga_korisnika">
+            <End Role="uloga_korisnika" EntitySet="uloga_korisnika" />
+            <End Role="korisnik" EntitySet="korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_moderator_dogadaja_dogadaj" Association="Self.FK_moderator_dogadaja_dogadaj">
+            <End Role="dogadaj" EntitySet="dogadaj" />
+            <End Role="moderator_dogadaja" EntitySet="moderator_dogadaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_moderator_dogadaja_korisnik" Association="Self.FK_moderator_dogadaja_korisnik">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="moderator_dogadaja" EntitySet="moderator_dogadaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prijava_za_turnir_tim" Association="Self.FK_prijava_za_turnir_tim">
+            <End Role="tim" EntitySet="tim" />
+            <End Role="prijava_za_turnir" EntitySet="prijava_za_turnir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prijava_za_turnir_turnir" Association="Self.FK_prijava_za_turnir_turnir">
+            <End Role="turnir" EntitySet="turnir" />
+            <End Role="prijava_za_turnir" EntitySet="prijava_za_turnir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_raspored_utakmica_turnir2" Association="Self.FK_raspored_utakmica_turnir2">
+            <End Role="turnir" EntitySet="turnir" />
+            <End Role="raspored_utakmica" EntitySet="raspored_utakmica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_samostalna_prijava_korisnik" Association="Self.FK_samostalna_prijava_korisnik">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="samostalna_prijava" EntitySet="samostalna_prijava" />
+          </AssociationSet>
+          <AssociationSet Name="FK_samostalna_prijava_turnir" Association="Self.FK_samostalna_prijava_turnir">
+            <End Role="turnir" EntitySet="turnir" />
+            <End Role="samostalna_prijava" EntitySet="samostalna_prijava" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistika_igraca_korisnik" Association="Self.FK_statistika_igraca_korisnik">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="statistika_igraca" EntitySet="statistika_igraca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistika_igraca_turnir_statistika_igraca1" Association="Self.FK_statistika_igraca_turnir_statistika_igraca1">
+            <End Role="statistika_igraca" EntitySet="statistika_igraca" />
+            <End Role="statistika_igraca_turnir" EntitySet="statistika_igraca_turnir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistika_igraca_turnir_turnir1" Association="Self.FK_statistika_igraca_turnir_turnir1">
+            <End Role="turnir" EntitySet="turnir" />
+            <End Role="statistika_igraca_turnir" EntitySet="statistika_igraca_turnir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_turnir_dogadaj" Association="Self.FK_turnir_dogadaj">
+            <End Role="dogadaj" EntitySet="dogadaj" />
+            <End Role="turnir" EntitySet="turnir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_turnir_sport" Association="Self.FK_turnir_sport">
+            <End Role="sport" EntitySet="sport" />
+            <End Role="turnir" EntitySet="turnir" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PI2231_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dogadaj">
+          <Key>
+            <PropertyRef Name="Id_dogadaj" />
+          </Key>
+          <Property Name="Id_dogadaj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="datum_izvodenja" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lokacija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rok_prijave" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="organizator" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="organizacija" Relationship="Self.FK_dogadaj_organizacija" FromRole="dogadaj" ToRole="organizacija" />
+          <NavigationProperty Name="status_dogadaja" Relationship="Self.FK_dogadaj_status_dogadaja" FromRole="dogadaj" ToRole="status_dogadaja" />
+          <NavigationProperty Name="turnirs" Relationship="Self.FK_turnir_dogadaj" FromRole="dogadaj" ToRole="turnir" />
+          <NavigationProperty Name="korisniks" Relationship="Self.moderator_dogadaja" FromRole="dogadaj" ToRole="korisnik" />
+        </EntityType>
+        <EntityType Name="grupa">
+          <Key>
+            <PropertyRef Name="id_grupa" />
+          </Key>
+          <Property Name="id_grupa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oznaka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="postignuti_golovi" Type="Int32" Nullable="false" />
+          <Property Name="primljeni_golovi" Type="Int32" Nullable="false" />
+          <Property Name="pobjede" Type="Int32" Nullable="false" />
+          <Property Name="porazi" Type="Int32" Nullable="false" />
+          <Property Name="remi" Type="Int32" Nullable="false" />
+          <Property Name="id_turnir" Type="Int32" Nullable="false" />
+          <Property Name="id_tim" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tim" Relationship="Self.FK_grupa_tim" FromRole="grupa" ToRole="tim" />
+          <NavigationProperty Name="turnir" Relationship="Self.FK_grupa_turnir" FromRole="grupa" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="korisnik">
+          <Key>
+            <PropertyRef Name="id_korisnik" />
+          </Key>
+          <Property Name="id_korisnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="korisnicko_ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lozinka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kontakt_broj" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_uloga" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="uloga_korisnika" Relationship="Self.FK_korisnik_uloga_korisnika" FromRole="korisnik" ToRole="uloga_korisnika" />
+          <NavigationProperty Name="statistika_igraca" Relationship="Self.FK_statistika_igraca_korisnik" FromRole="korisnik" ToRole="statistika_igraca" />
+          <NavigationProperty Name="tims" Relationship="Self.clanovi_tima" FromRole="korisnik" ToRole="tim" />
+          <NavigationProperty Name="dogadajs" Relationship="Self.moderator_dogadaja" FromRole="korisnik" ToRole="dogadaj" />
+          <NavigationProperty Name="turnirs" Relationship="Self.samostalna_prijava" FromRole="korisnik" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="organizacija">
+          <Key>
+            <PropertyRef Name="id_organizacija" />
+          </Key>
+          <Property Name="id_organizacija" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OIB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kontakt_broj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="korisnicko_ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lozinka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="dogadajs" Relationship="Self.FK_dogadaj_organizacija" FromRole="organizacija" ToRole="dogadaj" />
+        </EntityType>
+        <EntityType Name="raspored_utakmica">
+          <Key>
+            <PropertyRef Name="id_utakmica" />
+          </Key>
+          <Property Name="id_utakmica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tim_jedan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tim_dva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="broj_golova_prvog_tima" Type="Int32" Nullable="false" />
+          <Property Name="broj_golova_drugog_tima" Type="Int32" Nullable="false" />
+          <Property Name="id_turnir" Type="Int32" Nullable="false" />
+          <Property Name="faza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="turnir" Relationship="Self.FK_raspored_utakmica_turnir2" FromRole="raspored_utakmica" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id_sport" />
+          </Key>
+          <Property Name="id_sport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="min_clanova_tima" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="turnirs" Relationship="Self.FK_turnir_sport" FromRole="sport" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="statistika_igraca">
+          <Key>
+            <PropertyRef Name="statistika_igraca_id" />
+          </Key>
+          <Property Name="igrac_id" Type="Int32" Nullable="false" />
+          <Property Name="pogodak" Type="Int32" />
+          <Property Name="asistencija" Type="Int32" />
+          <Property Name="skok" Type="Int32" />
+          <Property Name="prekrsaj" Type="Int32" />
+          <Property Name="statistika_igraca_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="korisnik" Relationship="Self.FK_statistika_igraca_korisnik" FromRole="statistika_igraca" ToRole="korisnik" />
+          <NavigationProperty Name="turnirs" Relationship="Self.statistika_igraca_turnir" FromRole="statistika_igraca" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="status_dogadaja">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="dogadajs" Relationship="Self.FK_dogadaj_status_dogadaja" FromRole="status_dogadaja" ToRole="dogadaj" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tim">
+          <Key>
+            <PropertyRef Name="id_tim" />
+          </Key>
+          <Property Name="id_tim" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pristupni_kod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="broj_clanova" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="grupas" Relationship="Self.FK_grupa_tim" FromRole="tim" ToRole="grupa" />
+          <NavigationProperty Name="korisniks" Relationship="Self.clanovi_tima" FromRole="tim" ToRole="korisnik" />
+          <NavigationProperty Name="turnirs" Relationship="Self.prijava_za_turnir" FromRole="tim" ToRole="turnir" />
+        </EntityType>
+        <EntityType Name="turnir">
+          <Key>
+            <PropertyRef Name="id_turnir" />
+          </Key>
+          <Property Name="id_turnir" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kotizacija" Type="Double" Nullable="false" />
+          <Property Name="max_clanova_tima" Type="Int32" Nullable="false" />
+          <Property Name="id_dogadaj" Type="Int32" Nullable="false" />
+          <Property Name="id_sport" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dogadaj" Relationship="Self.FK_turnir_dogadaj" FromRole="turnir" ToRole="dogadaj" />
+          <NavigationProperty Name="grupas" Relationship="Self.FK_grupa_turnir" FromRole="turnir" ToRole="grupa" />
+          <NavigationProperty Name="raspored_utakmica" Relationship="Self.FK_raspored_utakmica_turnir2" FromRole="turnir" ToRole="raspored_utakmica" />
+          <NavigationProperty Name="sport" Relationship="Self.FK_turnir_sport" FromRole="turnir" ToRole="sport" />
+          <NavigationProperty Name="tims" Relationship="Self.prijava_za_turnir" FromRole="turnir" ToRole="tim" />
+          <NavigationProperty Name="korisniks" Relationship="Self.samostalna_prijava" FromRole="turnir" ToRole="korisnik" />
+          <NavigationProperty Name="statistika_igraca" Relationship="Self.statistika_igraca_turnir" FromRole="turnir" ToRole="statistika_igraca" />
+        </EntityType>
+        <EntityType Name="uloga_korisnika">
+          <Key>
+            <PropertyRef Name="id_uloga_korisnika" />
+          </Key>
+          <Property Name="id_uloga_korisnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="korisniks" Relationship="Self.FK_korisnik_uloga_korisnika" FromRole="uloga_korisnika" ToRole="korisnik" />
+        </EntityType>
+        <Association Name="FK_dogadaj_organizacija">
+          <End Role="organizacija" Type="Self.organizacija" Multiplicity="1" />
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organizacija">
+              <PropertyRef Name="id_organizacija" />
+            </Principal>
+            <Dependent Role="dogadaj">
+              <PropertyRef Name="organizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dogadaj_status_dogadaja">
+          <End Role="status_dogadaja" Type="Self.status_dogadaja" Multiplicity="1" />
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_dogadaja">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="dogadaj">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_turnir_dogadaj">
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="1" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dogadaj">
+              <PropertyRef Name="Id_dogadaj" />
+            </Principal>
+            <Dependent Role="turnir">
+              <PropertyRef Name="id_dogadaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupa_tim">
+          <End Role="tim" Type="Self.tim" Multiplicity="1" />
+          <End Role="grupa" Type="Self.grupa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim">
+              <PropertyRef Name="id_tim" />
+            </Principal>
+            <Dependent Role="grupa">
+              <PropertyRef Name="id_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupa_turnir">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="grupa" Type="Self.grupa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="grupa">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_uloga_korisnika">
+          <End Role="uloga_korisnika" Type="Self.uloga_korisnika" Multiplicity="1" />
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uloga_korisnika">
+              <PropertyRef Name="id_uloga_korisnika" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="id_uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistika_igraca_korisnik">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="1" />
+          <End Role="statistika_igraca" Type="Self.statistika_igraca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id_korisnik" />
+            </Principal>
+            <Dependent Role="statistika_igraca">
+              <PropertyRef Name="igrac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_raspored_utakmica_turnir2">
+          <End Role="turnir" Type="Self.turnir" Multiplicity="1" />
+          <End Role="raspored_utakmica" Type="Self.raspored_utakmica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnir">
+              <PropertyRef Name="id_turnir" />
+            </Principal>
+            <Dependent Role="raspored_utakmica">
+              <PropertyRef Name="id_turnir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_turnir_sport">
+          <End Role="sport" Type="Self.sport" Multiplicity="1" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="turnir">
+              <PropertyRef Name="id_sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="clanovi_tima">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="*" />
+          <End Role="tim" Type="Self.tim" Multiplicity="*" />
+        </Association>
+        <Association Name="moderator_dogadaja">
+          <End Role="dogadaj" Type="Self.dogadaj" Multiplicity="*" />
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="*" />
+        </Association>
+        <Association Name="prijava_za_turnir">
+          <End Role="tim" Type="Self.tim" Multiplicity="*" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+        </Association>
+        <Association Name="samostalna_prijava">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="*" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+        </Association>
+        <Association Name="statistika_igraca_turnir">
+          <End Role="statistika_igraca" Type="Self.statistika_igraca" Multiplicity="*" />
+          <End Role="turnir" Type="Self.turnir" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PI2231_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dogadajs" EntityType="Self.dogadaj" />
+          <EntitySet Name="grupas" EntityType="Self.grupa" />
+          <EntitySet Name="korisniks" EntityType="Self.korisnik" />
+          <EntitySet Name="organizacijas" EntityType="Self.organizacija" />
+          <EntitySet Name="raspored_utakmica" EntityType="Self.raspored_utakmica" />
+          <EntitySet Name="sports" EntityType="Self.sport" />
+          <EntitySet Name="statistika_igraca" EntityType="Self.statistika_igraca" />
+          <EntitySet Name="status_dogadaja" EntityType="Self.status_dogadaja" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tims" EntityType="Self.tim" />
+          <EntitySet Name="turnirs" EntityType="Self.turnir" />
+          <EntitySet Name="uloga_korisnika" EntityType="Self.uloga_korisnika" />
+          <AssociationSet Name="FK_dogadaj_organizacija" Association="Self.FK_dogadaj_organizacija">
+            <End Role="organizacija" EntitySet="organizacijas" />
+            <End Role="dogadaj" EntitySet="dogadajs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dogadaj_status_dogadaja" Association="Self.FK_dogadaj_status_dogadaja">
+            <End Role="status_dogadaja" EntitySet="status_dogadaja" />
+            <End Role="dogadaj" EntitySet="dogadajs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_turnir_dogadaj" Association="Self.FK_turnir_dogadaj">
+            <End Role="dogadaj" EntitySet="dogadajs" />
+            <End Role="turnir" EntitySet="turnirs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupa_tim" Association="Self.FK_grupa_tim">
+            <End Role="tim" EntitySet="tims" />
+            <End Role="grupa" EntitySet="grupas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupa_turnir" Association="Self.FK_grupa_turnir">
+            <End Role="turnir" EntitySet="turnirs" />
+            <End Role="grupa" EntitySet="grupas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_uloga_korisnika" Association="Self.FK_korisnik_uloga_korisnika">
+            <End Role="uloga_korisnika" EntitySet="uloga_korisnika" />
+            <End Role="korisnik" EntitySet="korisniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistika_igraca_korisnik" Association="Self.FK_statistika_igraca_korisnik">
+            <End Role="korisnik" EntitySet="korisniks" />
+            <End Role="statistika_igraca" EntitySet="statistika_igraca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_raspored_utakmica_turnir2" Association="Self.FK_raspored_utakmica_turnir2">
+            <End Role="turnir" EntitySet="turnirs" />
+            <End Role="raspored_utakmica" EntitySet="raspored_utakmica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_turnir_sport" Association="Self.FK_turnir_sport">
+            <End Role="sport" EntitySet="sports" />
+            <End Role="turnir" EntitySet="turnirs" />
+          </AssociationSet>
+          <AssociationSet Name="clanovi_tima" Association="Self.clanovi_tima">
+            <End Role="korisnik" EntitySet="korisniks" />
+            <End Role="tim" EntitySet="tims" />
+          </AssociationSet>
+          <AssociationSet Name="moderator_dogadaja" Association="Self.moderator_dogadaja">
+            <End Role="dogadaj" EntitySet="dogadajs" />
+            <End Role="korisnik" EntitySet="korisniks" />
+          </AssociationSet>
+          <AssociationSet Name="prijava_za_turnir" Association="Self.prijava_za_turnir">
+            <End Role="tim" EntitySet="tims" />
+            <End Role="turnir" EntitySet="turnirs" />
+          </AssociationSet>
+          <AssociationSet Name="samostalna_prijava" Association="Self.samostalna_prijava">
+            <End Role="korisnik" EntitySet="korisniks" />
+            <End Role="turnir" EntitySet="turnirs" />
+          </AssociationSet>
+          <AssociationSet Name="statistika_igraca_turnir" Association="Self.statistika_igraca_turnir">
+            <End Role="statistika_igraca" EntitySet="statistika_igraca" />
+            <End Role="turnir" EntitySet="turnirs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PI2231_DBModelStoreContainer" CdmEntityContainer="PI2231_DBEntities">
+          <EntitySetMapping Name="dogadajs">
+            <EntityTypeMapping TypeName="PI2231_DBModel.dogadaj">
+              <MappingFragment StoreEntitySet="dogadaj">
+                <ScalarProperty Name="Id_dogadaj" ColumnName="Id_dogadaj" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="datum_izvodenja" ColumnName="datum_izvodenja" />
+                <ScalarProperty Name="lokacija" ColumnName="lokacija" />
+                <ScalarProperty Name="rok_prijave" ColumnName="rok_prijave" />
+                <ScalarProperty Name="organizator" ColumnName="organizator" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupas">
+            <EntityTypeMapping TypeName="PI2231_DBModel.grupa">
+              <MappingFragment StoreEntitySet="grupa">
+                <ScalarProperty Name="id_grupa" ColumnName="id_grupa" />
+                <ScalarProperty Name="oznaka" ColumnName="oznaka" />
+                <ScalarProperty Name="postignuti_golovi" ColumnName="postignuti_golovi" />
+                <ScalarProperty Name="primljeni_golovi" ColumnName="primljeni_golovi" />
+                <ScalarProperty Name="pobjede" ColumnName="pobjede" />
+                <ScalarProperty Name="porazi" ColumnName="porazi" />
+                <ScalarProperty Name="remi" ColumnName="remi" />
+                <ScalarProperty Name="id_turnir" ColumnName="id_turnir" />
+                <ScalarProperty Name="id_tim" ColumnName="id_tim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="korisniks">
+            <EntityTypeMapping TypeName="PI2231_DBModel.korisnik">
+              <MappingFragment StoreEntitySet="korisnik">
+                <ScalarProperty Name="id_korisnik" ColumnName="id_korisnik" />
+                <ScalarProperty Name="ime" ColumnName="ime" />
+                <ScalarProperty Name="prezime" ColumnName="prezime" />
+                <ScalarProperty Name="korisnicko_ime" ColumnName="korisnicko_ime" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lozinka" ColumnName="lozinka" />
+                <ScalarProperty Name="kontakt_broj" ColumnName="kontakt_broj" />
+                <ScalarProperty Name="id_uloga" ColumnName="id_uloga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="organizacijas">
+            <EntityTypeMapping TypeName="PI2231_DBModel.organizacija">
+              <MappingFragment StoreEntitySet="organizacija">
+                <ScalarProperty Name="id_organizacija" ColumnName="id_organizacija" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="kontakt_broj" ColumnName="kontakt_broj" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="korisnicko_ime" ColumnName="korisnicko_ime" />
+                <ScalarProperty Name="lozinka" ColumnName="lozinka" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="raspored_utakmica">
+            <EntityTypeMapping TypeName="PI2231_DBModel.raspored_utakmica">
+              <MappingFragment StoreEntitySet="raspored_utakmica">
+                <ScalarProperty Name="id_utakmica" ColumnName="id_utakmica" />
+                <ScalarProperty Name="tim_jedan" ColumnName="tim_jedan" />
+                <ScalarProperty Name="tim_dva" ColumnName="tim_dva" />
+                <ScalarProperty Name="broj_golova_prvog_tima" ColumnName="broj_golova_prvog_tima" />
+                <ScalarProperty Name="broj_golova_drugog_tima" ColumnName="broj_golova_drugog_tima" />
+                <ScalarProperty Name="id_turnir" ColumnName="id_turnir" />
+                <ScalarProperty Name="faza" ColumnName="faza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sports">
+            <EntityTypeMapping TypeName="PI2231_DBModel.sport">
+              <MappingFragment StoreEntitySet="sport">
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="min_clanova_tima" ColumnName="min_clanova_tima" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statistika_igraca">
+            <EntityTypeMapping TypeName="PI2231_DBModel.statistika_igraca">
+              <MappingFragment StoreEntitySet="statistika_igraca">
+                <ScalarProperty Name="igrac_id" ColumnName="igrac_id" />
+                <ScalarProperty Name="pogodak" ColumnName="pogodak" />
+                <ScalarProperty Name="asistencija" ColumnName="asistencija" />
+                <ScalarProperty Name="skok" ColumnName="skok" />
+                <ScalarProperty Name="prekrsaj" ColumnName="prekrsaj" />
+                <ScalarProperty Name="statistika_igraca_id" ColumnName="statistika_igraca_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status_dogadaja">
+            <EntityTypeMapping TypeName="PI2231_DBModel.status_dogadaja">
+              <MappingFragment StoreEntitySet="status_dogadaja">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PI2231_DBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tims">
+            <EntityTypeMapping TypeName="PI2231_DBModel.tim">
+              <MappingFragment StoreEntitySet="tim">
+                <ScalarProperty Name="id_tim" ColumnName="id_tim" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="pristupni_kod" ColumnName="pristupni_kod" />
+                <ScalarProperty Name="broj_clanova" ColumnName="broj_clanova" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="turnirs">
+            <EntityTypeMapping TypeName="PI2231_DBModel.turnir">
+              <MappingFragment StoreEntitySet="turnir">
+                <ScalarProperty Name="id_turnir" ColumnName="id_turnir" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="kotizacija" ColumnName="kotizacija" />
+                <ScalarProperty Name="max_clanova_tima" ColumnName="max_clanova_tima" />
+                <ScalarProperty Name="id_dogadaj" ColumnName="id_dogadaj" />
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uloga_korisnika">
+            <EntityTypeMapping TypeName="PI2231_DBModel.uloga_korisnika">
+              <MappingFragment StoreEntitySet="uloga_korisnika">
+                <ScalarProperty Name="id_uloga_korisnika" ColumnName="id_uloga_korisnika" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="clanovi_tima" TypeName="PI2231_DBModel.clanovi_tima" StoreEntitySet="clanovi_tima">
+            <EndProperty Name="korisnik">
+              <ScalarProperty Name="id_korisnik" ColumnName="id_korisnik" />
+            </EndProperty>
+            <EndProperty Name="tim">
+              <ScalarProperty Name="id_tim" ColumnName="id_tim" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="moderator_dogadaja" TypeName="PI2231_DBModel.moderator_dogadaja" StoreEntitySet="moderator_dogadaja">
+            <EndProperty Name="dogadaj">
+              <ScalarProperty Name="Id_dogadaj" ColumnName="id_dogadaj" />
+            </EndProperty>
+            <EndProperty Name="korisnik">
+              <ScalarProperty Name="id_korisnik" ColumnName="id_moderator" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="prijava_za_turnir" TypeName="PI2231_DBModel.prijava_za_turnir" StoreEntitySet="prijava_za_turnir">
+            <EndProperty Name="tim">
+              <ScalarProperty Name="id_tim" ColumnName="id_tim" />
+            </EndProperty>
+            <EndProperty Name="turnir">
+              <ScalarProperty Name="id_turnir" ColumnName="id_turnir" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="samostalna_prijava" TypeName="PI2231_DBModel.samostalna_prijava" StoreEntitySet="samostalna_prijava">
+            <EndProperty Name="korisnik">
+              <ScalarProperty Name="id_korisnik" ColumnName="int_korisnik" />
+            </EndProperty>
+            <EndProperty Name="turnir">
+              <ScalarProperty Name="id_turnir" ColumnName="int_turnir" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="statistika_igraca_turnir" TypeName="PI2231_DBModel.statistika_igraca_turnir" StoreEntitySet="statistika_igraca_turnir">
+            <EndProperty Name="statistika_igraca">
+              <ScalarProperty Name="statistika_igraca_id" ColumnName="id_statistika_igraca" />
+            </EndProperty>
+            <EndProperty Name="turnir">
+              <ScalarProperty Name="id_turnir" ColumnName="id_turnir" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
